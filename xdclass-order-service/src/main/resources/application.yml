@@ -17,3 +17,9 @@ mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  #控制台输出sql
     map-underscore-to-camel-case: true #下划线转驼峰
+
+#使用随机负载均衡策略
+xdclass-video-service:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
