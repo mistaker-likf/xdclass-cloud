@@ -11,6 +11,8 @@ public class Video {
     private Integer  price;
     private Date createTime;
     private Double point;
+    //用于本地测试查看调用哪台机器
+    private String serveInfo;
 
     public Integer getId() {
         return id;
@@ -66,6 +68,14 @@ public class Video {
 
     public void setPoint(Double point) {
         this.point = point;
+    }
+
+    public String getServeInfo() {
+        return serveInfo;
+    }
+
+    public void setServeInfo(String serveInfo) {
+        this.serveInfo = serveInfo;
     }
 }
 

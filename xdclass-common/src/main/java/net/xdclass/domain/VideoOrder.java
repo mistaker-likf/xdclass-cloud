@@ -8,11 +8,14 @@ public class VideoOrder {
     private String outTradeNo;
     private Integer state;
     private Date createTime;
-    private  Integer totalFee;
+    private Integer totalFee;
     private Integer videoId;
     private String videoTitle;
     private String videoImg;
     private Integer userId;
+
+    //用于本地测试查看调用哪台机器
+    private String serveInfo;
 
     public Integer getId() {
         return id;
@@ -84,5 +87,13 @@ public class VideoOrder {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getServeInfo() {
+        return serveInfo;
+    }
+
+    public void setServeInfo(String serveInfo) {
+        this.serveInfo = serveInfo;
     }
 }

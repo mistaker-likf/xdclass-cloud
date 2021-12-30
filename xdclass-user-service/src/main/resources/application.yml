@@ -8,6 +8,10 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/cloud_user?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: 224336
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.74.131:8848
 
 mybatis:
   configuration:
