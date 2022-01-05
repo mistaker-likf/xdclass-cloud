@@ -8,6 +8,7 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -66,7 +67,7 @@ public class OrderController {
 
     int temp = 0;
     @RequestMapping("list")
-    public Object list(){
+    public Object list(HttpServletRequest request){
 //        try{
 //            TimeUnit.SECONDS.sleep(3);
 //        } catch (InterruptedException e) {
@@ -79,6 +80,7 @@ public class OrderController {
         map.put("title1", "AlibabaCloud微服务专题");
         map.put("title2", "小滴课堂面试专题第一季");
 
+        map.put("port", request.getServerPort()+"");
         return map;
     }
 }
