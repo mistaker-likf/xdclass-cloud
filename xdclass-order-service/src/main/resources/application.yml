@@ -12,8 +12,16 @@ spring:
     nacos:
       discovery:
         server-addr: 192.168.74.131:8848
+    sentinel:
+      transport:
+        dashboard: 192.168.74.131:8080
+        port: 9998
 
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  #控制台输出sql
     map-underscore-to-camel-case: true #下划线转驼峰
+
+feign:
+  sentinel:
+    enabled: true

@@ -4,6 +4,8 @@ import com.alibaba.nacos.api.naming.pojo.AbstractHealthChecker;
 import net.xdclass.domain.Video;
 import net.xdclass.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +25,14 @@ public class VideoController {
         //方便发现请求是哪台机器
         video.setServeInfo(request.getServerName() +":"+request.getServerPort());
         return video;
+    }
+
+    @PostMapping("save")
+    public int save(@RequestBody Video video){
+
+        System.out.println(video.getTitle());
+
+        return 1;
     }
 
 }
