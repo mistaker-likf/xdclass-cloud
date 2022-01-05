@@ -3,7 +3,12 @@ server:
 spring:
   application:
     name: api-gateway
-
+  zipkin:
+    base-url: http://127.0.0.1:9411  #zipkin地址
+    discovery-client-enabled: false  #不用开启服务发现
+  sleuth:
+    sampler:
+      probability: 1.0 #采样百分⽐ 100%收集 方便查看测试效果
   cloud:
     nacos:
       discovery:
@@ -17,7 +22,7 @@ spring:
           predicates:                #断⾔ 配置哪个路径才转发
             - Path=/order-server/**
             - Before=2022-01-06T01:01:01.000+08:00 #在此事件点之后不可访问
-            - Query=source           #必须要带此参数 在路径后面加上 ?source=xxx
+            #- Query=source           #必须要带此参数 在路径后面加上 ?source=xxx
           filters:                   #过滤器，请求在传递过程中通过过滤器修改
             - StripPrefix=1          #去掉第⼀层前缀 /order-server 使用过滤器处理的
       discovery:
