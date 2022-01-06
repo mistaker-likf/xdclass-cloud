@@ -1,33 +1,33 @@
-server:
-  port: 8888
-spring:
-  application:
-    name: api-gateway
-  zipkin:
-    base-url: http://127.0.0.1:9411  #zipkin地址
-    discovery-client-enabled: false  #不用开启服务发现
-  sleuth:
-    sampler:
-      probability: 1.0 #采样百分⽐ 100%收集 方便查看测试效果
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 192.168.74.131:8848
-    gateway:
-      routes:                        #数组形式
-        - id: order-service          #路由唯⼀标识
-#          uri: http://127.0.0.1:8000 #想要转发到的地址
-          uri: lb://xdclass-order-service #从nacos进行转发 负载均衡
-          order: 1                   #优先级，数字越⼩优先级越⾼
-          predicates:                #断⾔ 配置哪个路径才转发
-            - Path=/order-server/**
-            - Before=2022-01-06T01:01:01.000+08:00 #在此事件点之后不可访问
-            #- Query=source           #必须要带此参数 在路径后面加上 ?source=xxx
-          filters:                   #过滤器，请求在传递过程中通过过滤器修改
-            - StripPrefix=1          #去掉第⼀层前缀 /order-server 使用过滤器处理的
-      discovery:
-        locator:
-          enabled: true              #开启网关拉去nacos的服务
-  #访问路径 http://localhost:8888/order-server/api/v1/video_order/list
-  #转发路径 http://localhost:8000/order-server/api/v1/video_order/list
-  #需要过滤器去掉前⾯第⼀层
+#server:
+#  port: 8888
+#spring:
+#  application:
+#    name: api-gateway
+#  zipkin:
+#    base-url: http://127.0.0.1:9411  #zipkin地址
+#    discovery-client-enabled: false  #不用开启服务发现
+#  sleuth:
+#    sampler:
+#      probability: 1.0 #采样百分⽐ 100%收集 方便查看测试效果
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 192.168.74.131:8848
+#    gateway:
+#      routes:                        #数组形式
+#        - id: order-service          #路由唯⼀标识
+##          uri: http://127.0.0.1:8000 #想要转发到的地址
+#          uri: lb://xdclass-order-service #从nacos进行转发 负载均衡
+#          order: 1                   #优先级，数字越⼩优先级越⾼
+#          predicates:                #断⾔ 配置哪个路径才转发
+#            - Path=/order-server/**
+#            #- Before=2022-01-06T01:01:01.000+08:00 #在此事件点之后不可访问 记得注释
+#            #- Query=source           #必须要带此参数 在路径后面加上 ?source=xxx
+#          filters:                   #过滤器，请求在传递过程中通过过滤器修改
+#            - StripPrefix=1          #去掉第⼀层前缀 /order-server 使用过滤器处理的
+#      discovery:
+#        locator:
+#          enabled: true              #开启网关拉去nacos的服务
+#  #访问路径 http://localhost:8888/order-server/api/v1/video_order/list
+#  #转发路径 http://localhost:8000/order-server/api/v1/video_order/list
+#  #需要过滤器去掉前⾯第⼀层

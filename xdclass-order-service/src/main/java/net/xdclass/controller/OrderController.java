@@ -4,7 +4,9 @@ import net.xdclass.domain.Video;
 import net.xdclass.domain.VideoOrder;
 import net.xdclass.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,6 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/v1/video_order")
+@RefreshScope
 public class OrderController {
 
     @Autowired
@@ -25,6 +28,9 @@ public class OrderController {
 
     @Autowired
     private VideoService videoService;
+
+    @Value("${video.title}")
+    private String videoTitle;
 
     @RequestMapping("/save")
     public Object save(int videoId){
@@ -38,7 +44,7 @@ public class OrderController {
         Video video = videoService.findById(videoId);
         VideoOrder videoOrder = new VideoOrder();
         videoOrder.setVideoId(video.getId());
-        videoOrder.setVideoTitle(video.getTitle());
+        videoOrder.setVideoTitle(videoTitle);
         videoOrder.setCreateTime(new Date());
 
         videoOrder.setServeInfo(video.getServeInfo());
